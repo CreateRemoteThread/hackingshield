@@ -11,14 +11,16 @@ if(isset($_SESSION["hacking"]))
   die;
 }
 
-$blockedstrings = array("SELECT * FROM","UNION SELECT","<script>","<img>","<img src>","/etc/passwd","/etc/groups","/var/log/httpd.log");
+$blockedstrings = array("SELECT * FROM","UNION SELECT","<script>","<img>","<img src>","/etc/passwd","/etc/groups","/var/log/httpd.log","alert(");
 $blocked = false;
 
 foreach($_REQUEST as $key => $value)
 {
   foreach($blockedstrings as $bs)
   {
-    if(strpos($value,$bs) !== false)
+    // following feedback during lectures, this is now
+    // case insensitive :)
+    if(stripos($value,$bs) !== false)
     {
       $blocked = true;
     }
