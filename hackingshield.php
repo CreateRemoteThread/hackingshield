@@ -11,7 +11,9 @@ if(isset($_SESSION["hacking"]))
   die;
 }
 
-$blockedstrings = array("SELECT * FROM","UNION SELECT","<script>","<img>","<img src>","/etc/passwd","/etc/groups","/var/log/httpd.log","alert(");
+// WAF Change Log:
+// 15/06: Informed in a meeting that XOR was an sqli keyword.
+$blockedstrings = array("SELECT * FROM","UNION SELECT","<script>","<img>","<img src>","/etc/passwd","/etc/groups","/var/log/httpd.log","alert(","XOR","cmd/c");
 $blocked = false;
 
 foreach($_REQUEST as $key => $value)
